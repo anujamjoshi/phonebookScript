@@ -3,32 +3,53 @@
 #open file input.txt
 print "Enter file name that has the data \n>";
 $fileName = <STDIN>;
-open ( INPUTFILE, $fileName) || die "Sorry couldn't open" ;
+open ( INPUTFILE, $fileName) || die "Sorry couldn't open file please enter a valid file! " ;
 @phoneBookArray;
 while (<INPUTFILE>){
     push (@phoneBookArray, $_);
 }
+&mainMenu;
 sub mainMenu(){
-    print "(1) Listing of records in alphabetical order of first name or last name \n";
-    &printArray(&sortAlphaetical);
+    
+    print "\n \n \n \n \n \n \n(1) Listing of records in alphabetical order of first name or last name \n";
     print "(2) Listing of records in reverse alphabetical order of first name or last name \n";
-    &printArray(&reverseArray);
     print "(3) Search for a record by Last Name and print out the result.\n";
-    &searchLastName;
     print "(4) Search for a record by birthday in a given year or month.\n";
-    &printArray( &searchBirthday );
-    print "choose from options 1, 2, 3, 4 \n";
+    print "(5) exit";
+    print "choose from options 1, 2, 3, 4, 5 \n>";
+    $choice = <STDIN>;
+    if ($choice == 1){
+        &printArray(&sortAlphaetical);
+        &mainMenu;
+    }
+    elsif ($choice ==2){
+        &printArray(&reverseArray);
+        &mainMenu;
+    }
+    elsif ($choice ==3){
+        &searchLastName;
+        &mainMenu;
+    }
+    elsif ($choice ==4){
+        &printArray( &searchBirthday );
+        &mainMenu;
+    }
+    elsif ($choice == 5){
+        print "Thank you for using this!"
+    }
+    else{
+        print "Incorrect choice ";
+        &mainMenu;
+    }
 }
 sub printArray() {
-    print "Hi";
     foreach( @_ ) {
-        print "Hi";
         print  "$_";
         
     }
 }
 sub sortAlphaetical (){
-    print "do you want to sort by first name or last name?\n Enter 1 for first name or enter 2 for last name \n";
+    print "\ndo you want to sort by first name or last name?\n Enter 1 for first name or enter 2 for last name \n";
     $sortChoice = <STDIN>;
     if ($sortChoice == 1){
         print "Sorting by first name!\n";
@@ -88,7 +109,7 @@ sub searchBirthday(){
         #given the above file format for every line, use the grep command to
         chop $inputMonth;
         @entryMonth = grep  /^.*:.*:.*:.*:($inputMonth).*:.*$/ , @phoneBookArray;
-       
+        
     }
     elsif ($input ==2 ){
         print "Enter Year to search for \n>" ;
@@ -104,5 +125,5 @@ sub searchBirthday(){
         @entryMonth = grep  /^.*:.*:.*:.*:.*\/.*($inputYear):.*$/ , @phoneBookArray;
         
     }
-     return @entryMonth;
+    return @entryMonth;
 }
