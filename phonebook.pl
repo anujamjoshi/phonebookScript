@@ -1,8 +1,10 @@
 #!/usr/bin/perl
 #Author Anuja Joshi
 #open file input.txt
+#get the input file from the user
 print "Enter file name that has the data \n>";
 $fileName = <STDIN>;
+#if that file is not correct then
 open ( INPUTFILE, $fileName) || die "Sorry couldn't open file please enter a valid file! " ;
 @phoneBookArray;
 while (<INPUTFILE>){
