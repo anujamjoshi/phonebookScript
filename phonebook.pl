@@ -110,7 +110,7 @@ sub searchBirthday(){
         #   6. Salary
         #given the above file format for every line, use the grep command to
         chop $inputMonth;
-        @entryMonth = grep  /^.*:.*:.*:.*:($inputMonth).*:.*$/ , @phoneBookArray;
+        @entryMonth = grep  /^.*:.*:.*:.*:.*($inputMonth).*:.*$/ , @phoneBookArray;
         
     }
     elsif ($input ==2 ){

@@ -50,6 +50,37 @@ sortReverse (){
             echo "Invalid Input Try again! "
     esac
 }
+searchLastName(){
+    echo "To search for an entry by last name please enter the last name bellow "
+    echo ">"
+    read lastName
+    grep "^.*\s$lastName.*:.*:.*:.*:.*:.*$" $fileName
+}
+searchBirthday () {
+    echo "Do you want to search by the Month or the Year?"
+    echo "Enter 1 to search by month"
+    echo "Enter 2 to search by Year"
+    read input
+    case $input in
+        1)
+             echo "Enter month to search for in the number format"
+            echo "For example: enter 01 for January"
+            echo "02 for Febuary"
+            echo "03 for March"
+            echo "11 for November"
+            echo "12 for December"
+            read month
+             grep "^.*:.*:.*:.*:$month.*:.*$" $fileName
+        ;;
+        2)
+            echo "Enter year to search for "
+            read year
+            grep "^.*:.*:.*:.*:.*$year:.*$" $fileName
+        ;;
+        *)
+            print "Incorrect Input"
+    esac
+}
 
 printMenu
 read option
@@ -65,9 +96,11 @@ do
     ;;
     3 )
         echo "Search by lastname "
+        searchLastName
     ;;
     4 )
         echo "Search birthday"
+        searchBirthday
     ;;
     5 )
         echo "Thank you for using the program "
